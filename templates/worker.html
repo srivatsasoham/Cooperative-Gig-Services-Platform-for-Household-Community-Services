@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+
+{% block title %}Worker-Owner Dashboard - SahakariGig Cooperative Ecosystem{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- WORKER HEADER PROFILE & STATUS TOGGLE -->
+    <div class="glass-panel-glow rounded-3xl p-6 sm:p-8 border border-emerald-500/30">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            
+            <div class="flex items-center gap-4 sm:gap-6">
+                <div class="relative">
+                    <img src="{{ worker.avatar }}" alt="{{ worker.name }}" class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-emerald-400 shadow-xl">
+                    <span class="absolute -bottom-2 -right-2 px-2 py-0.5 rounded-lg text-[10px] font-black bg-emerald-500 text-white shadow-md">
+                        MEMBER
+                    </span>
+                </div>
+
+                <div class="space-y-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <h1 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">{{ worker.name }}</h1>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                            <i class="fa-solid fa-crown text-amber-400 mr-1"></i> {{ worker.badge }}
+                        </span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-300">{{ worker.role }} • {{ worker.experience }} Exp</p>
+                    <div class="flex flex-wrap items-center gap-3 text-xs text-slate-400 pt-1">
+                        <span><i class="fa-solid fa-star text-amber-400 mr-1"></i> <b class="text-white">{{ worker.rating }}</b> rating</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i> {{ worker.jobs_completed }} jobs completed</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-shield-heart text-indigo-400 mr-1"></i> Insured via Co-op Pool</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Online / Offline Controls & Quick Actions -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 bg-slate-900/80 p-3.5 rounded-2xl border border-slate-800">
+                <div id="status-live-badge" class="px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span>Online & Receiving Dispatches</span>
+                </div>
+                <button id="btn-status-toggle" onclick="toggleWorkerStatus()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30 transition">
+                    Go Offline
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- FINANCIAL & EQUITY METRICS GRID -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <!-- Live Wallet Balance -->
+        <div class="glass-panel rounded-3xl p-6 space-y-3 relative overflow-hidden">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>Available Co-op Balance</span>
+                <i class="fa-solid fa-wallet text-emerald-400 text-lg"></i>
+            </div>
+            <div class="text-3xl font-black font-heading text-white" id="worker-wallet-bal">₹4,850</div>
+            <div class="flex items-center justify-between pt-2 border-t border-slate-800">
+                <span class="text-[11px] text-emerald-400 font-semibold"><i class="fa-solid fa-bolt mr-1"></i> Zero payout fee</span>
+                <button onclick="openWithdrawModal()" class="px-3 py-1 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold shadow-md">
+                    Instant UPI Disbursal
+                </button>
+            </div>
+        </div>
+
+        <!-- Co-op Equity Shares -->
+        <div class="glass-panel rounded-3xl p-6 space-y-3">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>Cooperative Ownership Shares</span>
+                <i class="fa-solid fa-chart-pie text-cyan-400 text-lg"></i>
+            </div>
+            <div class="text-3xl font-black font-heading text-cyan-400">{{ worker.shares_owned }} <span class="text-sm font-normal text-slate-400">Class-A</span></div>
+            <p class="text-[11px] text-slate-400">Earn 1 share for every 10 5-star gigs completed. Gives voting rights.</p>
+        </div>
+
+        <!-- Patronage Dividend Accrued -->
+        <div class="glass-panel rounded-3xl p-6 space-y-3">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>Accrued Patronage Dividend</span>
+                <i class="fa-solid fa-hand-holding-dollar text-amber-400 text-lg"></i>
+            </div>
+            <div class="text-3xl font-black font-heading text-amber-400">₹{{ worker.dividend_earned }}</div>
+            <p class="text-[11px] text-slate-400">Paid out quarterly from collective co-op platform surplus.</p>
+        </div>
+
+        <!-- Welfare Health Safety Net -->
+        <div class="glass-panel rounded-3xl p-6 space-y-3">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>Welfare & Health Safety Net</span>
+                <i class="fa-solid fa-shield-halved text-indigo-400 text-lg"></i>
+            </div>
+            <div class="text-lg font-black font-heading text-indigo-300">₹5,00,000 Cover</div>
+            <button onclick="openWelfareClaimModal()" class="w-full py-1.5 rounded-lg bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 text-xs font-bold border border-indigo-500/40">
+                File Welfare / Health Claim
+            </button>
+        </div>
+
+    </div>
+
+
+    <!-- RADAR MAP & INCOMING GIGS SPLIT SECTION -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Live Radar Map (7 Cols) -->
+        <div class="lg:col-span-7 space-y-4">
+            <div class="glass-panel rounded-3xl p-6 space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold font-heading text-white flex items-center gap-2">
+                            <i class="fa-solid fa-radar text-emerald-400"></i> Hyperlocal Dispatch Radar
+                        </h3>
+                        <p class="text-xs text-slate-400">Fair algorithm dispatch within 3.5 km radius. No penalty for skipped jobs.</p>
+                    </div>
+                    <span class="px-2 py-1 rounded-md text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700">
+                        GPS Active (Indiranagar)
+                    </span>
+                </div>
+
+                <!-- Map Container with Radar animation overlay -->
+                <div class="relative rounded-2xl overflow-hidden border border-slate-800 h-[380px] radar-sweep-container">
+                    <div id="worker-radar-map" class="w-full h-full"></div>
+                    <div id="radar-animation" class="radar-sweep"></div>
+                </div>
+
+                <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+                    <span><i class="fa-solid fa-circle text-emerald-400 text-[10px] mr-1"></i> Your Location</span>
+                    <span><i class="fa-solid fa-circle text-indigo-400 text-[10px] mr-1"></i> Incoming Co-op Request</span>
+                    <span><i class="fa-solid fa-circle text-amber-400 text-[10px] mr-1"></i> High Demand RWA Hub</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Incoming Job Dispatch Feed (5 Cols) -->
+        <div class="lg:col-span-5 space-y-4">
+            <div class="glass-panel rounded-3xl p-6 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold font-heading text-white">Live Dispatched Tasks</h3>
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300">
+                        {{ radar_jobs|length }} New Match
+                    </span>
+                </div>
+
+                <div class="space-y-4" id="radar-jobs-container">
+                    {% for job in radar_jobs %}
+                    <div id="job-card-{{ job.id }}" class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3 hover:border-indigo-500/40 transition">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300">
+                                {{ job.urgency }}
+                            </span>
+                            <span class="text-xs text-slate-400"><i class="fa-solid fa-location-dot text-emerald-400 mr-1"></i>{{ job.distance }}</span>
+                        </div>
+
+                        <div>
+                            <h4 class="text-sm font-bold text-white">{{ job.title }}</h4>
+                            <p class="text-xs text-slate-400 mt-1">Customer: <b class="text-slate-200">{{ job.customer }}</b></p>
+                        </div>
+
+                        <!-- Price Breakdown -->
+                        <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-center justify-between text-xs">
+                            <div>
+                                <span class="text-slate-400">Direct Take-Home:</span>
+                                <div class="text-base font-black text-emerald-400">₹{{ job.payout }}</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-slate-400">Welfare Fund Pool:</span>
+                                <div class="text-xs font-bold text-indigo-300">+₹{{ job.welfare_credit }}</div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2 pt-1">
+                            <button onclick="document.getElementById('job-card-{{ job.id }}').remove()" class="py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">
+                                Decline
+                            </button>
+                            <button onclick="acceptRadarJob('{{ job.id }}', {{ job.payout }})" class="py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-check"></i> Accept Job
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Co-op Tool Bank Depot Info -->
+            <div class="p-5 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-2">
+                <div class="flex items-center gap-2 text-xs font-bold text-cyan-400">
+                    <i class="fa-solid fa-toolbox"></i> Shared Tool Depot (Sector 4 Hub)
+                </div>
+                <p class="text-xs text-slate-300">
+                    Need heavy tools? Check out Bosch Core Drill #04 or FLIR Thermal Sensor with your member ID for 0 rental cost.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- WITHDRAW TO UPI MODAL -->
+<div id="withdraw-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="w-full max-w-md glass-panel rounded-3xl border border-emerald-500/40 p-6 sm:p-8 space-y-5">
+        <div class="flex items-center justify-between">
+            <h3 class="text-lg font-bold font-heading text-white flex items-center gap-2">
+                <i class="fa-solid fa-money-bill-transfer text-emerald-400"></i> Instant UPI Payout
+            </h3>
+            <button onclick="closeWithdrawModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="space-y-4 text-xs">
+            <div>
+                <label class="block text-slate-300 font-semibold mb-1">Withdrawal Amount (₹)</label>
+                <input type="number" id="withdraw-amount" class="w-full px-4 py-2.5 rounded-xl glass-input text-sm font-bold text-white">
+            </div>
+
+            <div>
+                <label class="block text-slate-300 font-semibold mb-1">Registered UPI ID / VPA</label>
+                <input type="text" id="withdraw-upi" value="ramesh.sharma@okhdfcbank" class="w-full px-4 py-2.5 rounded-xl glass-input text-sm">
+            </div>
+
+            <div class="p-3 rounded-xl bg-slate-900 text-slate-400">
+                <i class="fa-solid fa-shield-check text-emerald-400 mr-1"></i> Disbursed instantly via NPCI UPI / IMPS with 0 platform deduction.
+            </div>
+
+            <button onclick="processWithdrawal()" class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-lg shadow-emerald-500/30">
+                Confirm Instant Transfer
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- WELFARE HEALTH CLAIM MODAL -->
+<div id="welfare-claim-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="w-full max-w-md glass-panel rounded-3xl border border-indigo-500/40 p-6 sm:p-8 space-y-5">
+        <div class="flex items-center justify-between">
+            <h3 class="text-lg font-bold font-heading text-white flex items-center gap-2">
+                <i class="fa-solid fa-shield-heart text-indigo-400"></i> Co-op Welfare Claim
+            </h3>
+            <button onclick="closeWelfareClaimModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="space-y-4 text-xs">
+            <div>
+                <label class="block text-slate-300 font-semibold mb-1">Claim Category</label>
+                <select id="claim-type" class="w-full px-4 py-2.5 rounded-xl glass-input text-sm">
+                    <option value="OPD Medical & Prescription Reimbursement" class="bg-slate-900">OPD & Prescription Reimbursement</option>
+                    <option value="Hospitalization Emergency Cash Grant" class="bg-slate-900">Hospitalization Emergency Cash Grant</option>
+                    <option value="Tool Breakdown Replacement Assistance" class="bg-slate-900">Tool Breakdown Replacement Assistance</option>
+                    <option value="Child Education Scholarship Grant" class="bg-slate-900">Child Education Scholarship Grant</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-slate-300 font-semibold mb-1">Claim Amount (₹)</label>
+                <input type="number" id="claim-amount" value="3500" class="w-full px-4 py-2.5 rounded-xl glass-input text-sm">
+            </div>
+
+            <div>
+                <label class="block text-slate-300 font-semibold mb-1">Upload Receipt / Bill (PDF/Photo)</label>
+                <input type="file" class="w-full px-4 py-2 rounded-xl glass-input text-xs">
+            </div>
+
+            <button onclick="submitWelfareClaim()" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg shadow-indigo-600/30">
+                Submit Claim to Peer Council
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/worker.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}SIH Pitch & Platform Cooperativism Whitepaper - SahakariGig{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+    <!-- HEADER PITCH -->
+    <div class="text-center space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold">
+            <i class="fa-solid fa-trophy text-amber-400"></i> Smart India Hackathon (SIH) Solution
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-black font-heading text-white">
+            Cooperative Gig Services Platform for Household & Community Services
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            Transitioning India's gig economy from centralized algorithmic extraction to a self-sustaining, democratic worker-owned cooperative ecosystem.
+        </p>
+    </div>
+
+
+    <!-- THE PROBLEM VS THE COOPERATIVE SOLUTION -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- The Problem -->
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-rose-500/30 space-y-4">
+            <div class="flex items-center gap-3 text-rose-400 text-lg font-bold">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <h3>The Centralized Gig Crisis</h3>
+            </div>
+            <ul class="space-y-3 text-xs text-slate-300 leading-relaxed">
+                <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                    <span><b>20% to 35% Extractive Cuts:</b> Corporate middlemen siphon massive commissions out of workers' manual labor.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                    <span><b>Algorithmic Oppression & Shadow Banning:</b> Opaque algorithms penalize workers arbitrarily with zero right to appeal.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                    <span><b>Zero Social Security:</b> Gig workers lack health insurance, pension funds, or emergency accident coverage.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                    <span><b>Capital Flight:</b> Profits generated in Indian neighborhoods are routed to external corporate entities rather than circulating in the local community.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- The SahakariGig Solution -->
+        <div class="glass-panel-glow rounded-3xl p-6 sm:p-8 border border-emerald-500/40 space-y-4">
+            <div class="flex items-center gap-3 text-emerald-400 text-lg font-bold">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>The SahakariGig Revolution</h3>
+            </div>
+            <ul class="space-y-3 text-xs text-slate-300 leading-relaxed">
+                <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span><b>97% Direct Take-Home:</b> Workers receive 97% of every rupee paid. Only 3% is retained for the worker welfare fund.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span><b>Democratic DAO Co-op Governance:</b> Workers vote on platform policies, dispute tribunals, and commission rates (1 member = 1 vote).</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span><b>Built-in Safety Net & Tool Bank:</b> Health insurance, emergency accident grants, and free tool depot access funded by the 3% pool.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span><b>Patronage Dividends:</b> 100% of platform surplus profit is returned quarterly to workers and community members.</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <!-- ARCHITECTURAL PILLARS FOR SIH JUDGES -->
+    <div class="space-y-6">
+        <h2 class="text-2xl font-black font-heading text-white text-center">4 Core Architecture Pillars</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div class="glass-panel rounded-2xl p-5 space-y-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg font-bold">
+                    1
+                </div>
+                <h4 class="text-sm font-bold text-white">Fair Radar Dispatch</h4>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Transparent GPS matching without discriminatory acceptance quotas or hidden surge deactivations.
+                </p>
+            </div>
+
+            <div class="glass-panel rounded-2xl p-5 space-y-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-lg font-bold">
+                    2
+                </div>
+                <h4 class="text-sm font-bold text-white">Co-op Welfare Pool</h4>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Automated 3% micro-allocation into Ayushman health insurance, zero-interest tool loans, and peer dispute relief.
+                </p>
+            </div>
+
+            <div class="glass-panel rounded-2xl p-5 space-y-3">
+                <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-lg font-bold">
+                    3
+                </div>
+                <h4 class="text-sm font-bold text-white">RWA Collective Buying</h4>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Group buying algorithms enabling apartment complexes to pool maintenance tasks for bulk discounts and guaranteed artisan work.
+                </p>
+            </div>
+
+            <div class="glass-panel rounded-2xl p-5 space-y-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg font-bold">
+                    4
+                </div>
+                <h4 class="text-sm font-bold text-white">Democratic Ballots</h4>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Decentralized voting interface allowing every member to propose, debate, and vote on operational rules.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- TECHNICAL STACK & AZURE DEPLOYMENT OVERVIEW -->
+    <div class="glass-panel rounded-3xl p-6 sm:p-8 space-y-6">
+        <h3 class="text-xl font-bold font-heading text-white flex items-center gap-2">
+            <i class="fa-solid fa-code text-indigo-400"></i> Technology Stack & Cloud Deployment
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
+                <span class="text-emerald-400 font-bold">Backend & API Layer</span>
+                <p class="text-slate-300 font-medium">Python 3.13 Flask REST Server</p>
+                <p class="text-slate-500">WSGI Gunicorn, dynamic mock data engine, secure session store.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
+                <span class="text-cyan-400 font-bold">Frontend & Interactive UX</span>
+                <p class="text-slate-300 font-medium">Glassmorphism UI Engine</p>
+                <p class="text-slate-500">Tailwind CSS, Leaflet.js GIS, Chart.js Analytics, Web Audio synthesizer.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
+                <span class="text-indigo-400 font-bold">Cloud & Deployment</span>
+                <p class="text-slate-300 font-medium">Microsoft Azure App Service</p>
+                <p class="text-slate-500">Configured for Central India App Service Plan (SihPro) with GitHub CI/CD.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

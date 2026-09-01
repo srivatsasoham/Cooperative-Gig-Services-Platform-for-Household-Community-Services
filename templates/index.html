@@ -1,0 +1,378 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="space-y-20 pb-16">
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-12 pb-8 sm:pt-20 sm:pb-16 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center space-y-6 max-w-4xl mx-auto">
+                
+                <!-- Topic Pill -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-emerald-500/30 text-emerald-400 text-xs font-semibold shadow-lg shadow-emerald-500/10">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span>Smart India Hackathon: Cooperative Gig Platform</span>
+                </div>
+
+                <!-- Main Hero Headline -->
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black font-heading tracking-tight text-white leading-[1.1]">
+                    <span data-i18n="hero_title_1">Fair Work.</span>
+                    <span class="text-gradient-emerald" data-i18n="hero_title_2">Community Trust.</span><br>
+                    <span class="text-gradient-cyan-indigo" data-i18n="hero_title_3">Zero Exploitation.</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed" data-i18n="hero_sub">
+                    India's first 100% worker-owned cooperative for household & community services. 97% of your fee goes directly to your verified pro. 3% feeds the worker healthcare & dividend safety net.
+                </p>
+
+                <!-- Search & Voice Query Bar -->
+                <div class="max-w-2xl mx-auto pt-2">
+                    <div class="relative flex items-center p-2 rounded-2xl glass-panel-glow shadow-2xl">
+                        <i class="fa-solid fa-magnifying-glass text-slate-400 ml-4 mr-2"></i>
+                        <input type="text" id="service-search" oninput="filterServices()" placeholder="Search services (e.g., Electrical, AC, Leak, Cleaning, Elder Care)..." class="w-full bg-transparent text-white placeholder-slate-400 text-sm focus:outline-none py-2">
+                        
+                        <button onclick="startVoiceSearch()" title="Search with Voice" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-emerald-400 text-xs flex items-center gap-1.5 transition">
+                            <i class="fa-solid fa-microphone text-emerald-400"></i>
+                            <span class="hidden sm:inline">Voice</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Live Metrics Ticker Badges -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-6 max-w-4xl mx-auto">
+                    <div class="p-4 rounded-2xl glass-panel border border-white/5 text-center">
+                        <div class="text-2xl font-black text-emerald-400 font-heading">97%</div>
+                        <div class="text-xs text-slate-400 mt-0.5">Worker Direct Take-Home</div>
+                    </div>
+                    <div class="p-4 rounded-2xl glass-panel border border-white/5 text-center">
+                        <div class="text-2xl font-black text-cyan-400 font-heading">₹24.8L+</div>
+                        <div class="text-xs text-slate-400 mt-0.5">Paid Directly to Pros</div>
+                    </div>
+                    <div class="p-4 rounded-2xl glass-panel border border-white/5 text-center">
+                        <div class="text-2xl font-black text-indigo-400 font-heading">4,200+</div>
+                        <div class="text-xs text-slate-400 mt-0.5">Co-op Member Pros</div>
+                    </div>
+                    <div class="p-4 rounded-2xl glass-panel border border-white/5 text-center">
+                        <div class="text-2xl font-black text-amber-400 font-heading">0%</div>
+                        <div class="text-xs text-slate-400 mt-0.5">Corporate Middleman Cut</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FAIR ECONOMY INTERACTIVE COMPARISON CALCULATOR -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="glass-panel-glow rounded-3xl p-6 sm:p-10 border border-emerald-500/30">
+            <div class="max-w-3xl mx-auto text-center space-y-3 mb-8">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-400 text-xs font-bold">
+                    <i class="fa-solid fa-calculator"></i> Fair Share Transparency
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-white" data-i18n="calc_title">
+                    The Platform Cooperativism Advantage
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-300" data-i18n="calc_sub">
+                    Drag the slider to test any service booking amount and compare how much more income stays in worker pockets.
+                </p>
+            </div>
+
+            <!-- Slider Control -->
+            <div class="max-w-xl mx-auto space-y-4 mb-10">
+                <div class="flex items-center justify-between text-sm">
+                    <span class="text-slate-400">Service Booking Bill:</span>
+                    <span id="calc-amount-label" class="text-2xl font-black text-emerald-400 font-heading">₹1,500</span>
+                </div>
+                <input type="range" min="300" max="6000" step="100" value="1500" oninput="updateFairCalculator(this.value)" class="w-full cursor-pointer">
+                <div class="flex justify-between text-[11px] text-slate-400">
+                    <span>₹300 (Basic repair)</span>
+                    <span>₹1,500 (Deep Service)</span>
+                    <span>₹6,000 (Full Home Overhaul)</span>
+                </div>
+            </div>
+
+            <!-- Side by Side Model Comparison -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                
+                <!-- Traditional Corporate App Box -->
+                <div class="p-6 rounded-2xl bg-slate-900/90 border border-rose-500/30 space-y-4 relative overflow-hidden">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                        <div>
+                            <span class="text-xs font-bold text-rose-400 uppercase tracking-wider">Traditional Gig App</span>
+                            <div class="text-lg font-bold text-white">Centralized Aggregator</div>
+                        </div>
+                        <i class="fa-solid fa-building-columns text-rose-400/50 text-2xl"></i>
+                    </div>
+
+                    <div class="space-y-3 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Worker Payout (~68%):</span>
+                            <span id="calc-corp-worker" class="font-bold text-slate-200">₹1,020</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div id="bar-corp-worker" class="bg-rose-500 h-full rounded-full" style="width: 68%;"></div>
+                        </div>
+
+                        <div class="flex justify-between text-rose-300">
+                            <span>Extractive Commission (32%):</span>
+                            <span id="calc-corp-cut" class="font-bold">₹480</span>
+                        </div>
+                        <div class="flex justify-between text-slate-400">
+                            <span>Worker Healthcare / Reserve:</span>
+                            <span class="text-rose-400 font-semibold">₹0 (Zero Safety Net)</span>
+                        </div>
+                        <div class="flex justify-between text-slate-400">
+                            <span>Worker Governance Voice:</span>
+                            <span class="text-rose-400 font-semibold">0% (Algorithm Disciplinary)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SahakariGig Cooperative Box -->
+                <div class="p-6 rounded-2xl bg-emerald-950/40 border border-emerald-500/50 space-y-4 relative overflow-hidden glow-emerald">
+                    <div class="flex items-center justify-between pb-3 border-b border-emerald-500/30">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">SahakariGig Model</span>
+                            <div class="text-lg font-bold text-white">Worker-Owned Co-op</div>
+                        </div>
+                        <i class="fa-solid fa-handshake-angle text-emerald-400 text-2xl"></i>
+                    </div>
+
+                    <div class="space-y-3 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">Direct Worker Take-Home (97%):</span>
+                            <span id="calc-coop-worker" class="font-bold text-emerald-300">₹1,455</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div id="bar-coop-worker" class="bg-emerald-400 h-full rounded-full" style="width: 97%;"></div>
+                        </div>
+
+                        <div class="flex justify-between text-indigo-300">
+                            <span>Worker Healthcare & Welfare Fund (3%):</span>
+                            <span id="calc-coop-welfare" class="font-bold text-indigo-300">₹45</span>
+                        </div>
+                        <div class="flex justify-between text-slate-300">
+                            <span>Corporate Platform Middleman Cut:</span>
+                            <span class="text-emerald-400 font-bold">₹0</span>
+                        </div>
+                        <div class="flex justify-between text-slate-300">
+                            <span>Democratic Co-op Voting:</span>
+                            <span class="text-emerald-300 font-semibold">100% Worker-Steward DAO</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-emerald-500/30 flex items-center justify-between text-xs">
+                        <span class="text-slate-300 font-medium">Extra income in worker pocket:</span>
+                        <span id="calc-extra-gain" class="font-black text-emerald-400 text-sm font-heading">+₹435</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-6 text-xs text-emerald-300 font-medium">
+                <i class="fa-solid fa-circle-info mr-1"></i> <span id="calc-gain-pct">+43% more income to worker</span> on every single job, creating sustainable livelihoods and community wealth.
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CO-OP SERVICES CATALOG & CATEGORY FILTER -->
+    <section id="services" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Vetted Craftsmen & Fair Pricing</span>
+                <h2 class="text-3xl font-black font-heading text-white mt-1">Household & Community Services</h2>
+            </div>
+            <div class="text-xs text-slate-400 max-w-sm">
+                Each service is delivered by certified Co-op Members with a transparent price warranty and 97% direct worker payout.
+            </div>
+        </div>
+
+        <!-- Category Filter Buttons -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            {% for cat in categories %}
+            <button onclick="selectCategory('{{ cat.id }}', this)" class="cat-filter-btn px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all border {% if cat.id == 'all' %}bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 border-emerald-400{% else %}bg-slate-800/80 text-slate-300 border-slate-700/60 hover:bg-slate-700{% endif %} flex items-center gap-2">
+                <i class="fa-solid {{ cat.icon }}"></i>
+                <span>{{ cat.name }}</span>
+            </button>
+            {% endfor %}
+        </div>
+
+        <!-- Services Grid -->
+        <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for s in services %}
+            <div class="service-card glass-panel rounded-3xl p-6 flex flex-col justify-between hover:border-emerald-500/40 transition-all group"
+                 data-category="{{ s.category }}"
+                 data-category-name="{{ s.category_name }}"
+                 data-title="{{ s.title }}"
+                 data-desc="{{ s.description }}">
+                
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="px-3 py-1 rounded-xl text-[11px] font-bold bg-slate-800 text-slate-300 border border-slate-700 flex items-center gap-1.5">
+                            <i class="fa-solid {{ s.icon }} text-emerald-400"></i> {{ s.category_name }}
+                        </span>
+                        <div class="flex items-center gap-1 text-xs font-bold text-amber-400">
+                            <i class="fa-solid fa-star"></i> {{ s.rating }} <span class="text-slate-400 font-normal">({{ s.reviews_count }})</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold font-heading text-white group-hover:text-emerald-300 transition">{{ s.title }}</h3>
+                        <p class="text-xs text-slate-400 mt-2 line-clamp-2 leading-relaxed">{{ s.description }}</p>
+                    </div>
+
+                    <!-- Features bullets -->
+                    <ul class="space-y-1.5 pt-2 border-t border-slate-800/80">
+                        {% for f in s.features[:2] %}
+                        <li class="text-[11px] text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> {{ f }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="pt-6 mt-6 border-t border-slate-800 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-2xl font-black font-heading text-white">₹{{ s.price }}</span>
+                                <span class="text-xs line-through text-slate-400">₹{{ s.market_price }}</span>
+                            </div>
+                            <span class="text-[10px] text-emerald-400 font-semibold">Pro gets ₹{{ s.worker_share }} (97%)</span>
+                        </div>
+                        <span class="text-[11px] text-slate-400"><i class="fa-solid fa-clock mr-1 text-slate-400"></i>{{ s.duration }}</span>
+                    </div>
+
+                    <button onclick='openBookingModal({{ s | tojson | safe }})' class="w-full py-3 rounded-xl bg-slate-800 hover:bg-emerald-500 hover:text-white text-emerald-300 border border-slate-700 hover:border-emerald-400 font-bold text-xs tracking-wide transition-all shadow-md flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-calendar-check"></i> Book Cooperative Pro
+                    </button>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+        <div id="no-services-found" class="hidden text-center py-16 glass-panel rounded-3xl">
+            <i class="fa-solid fa-magnifying-glass text-4xl text-slate-600 mb-3"></i>
+            <p class="text-base text-slate-300 font-semibold">No services matched your query.</p>
+            <p class="text-xs text-slate-400 mt-1">Try keywords like "AC", "Leak", "Electrical", or "Elder".</p>
+        </div>
+
+    </section>
+
+
+    <!-- VERIFIED WORKER-OWNER SPOTLIGHT -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Democratic Ownership</span>
+                <h2 class="text-3xl font-black font-heading text-white mt-1">Meet Your Cooperative Craftsmen</h2>
+            </div>
+            <a href="{{ url_for('worker_dashboard') }}" class="text-xs text-emerald-400 font-bold hover:underline flex items-center gap-1">
+                Explore Worker-Owner Portal <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for w in workers %}
+            <div class="glass-panel rounded-3xl p-5 space-y-4 hover:border-emerald-500/40 transition">
+                <div class="relative">
+                    <img src="{{ w.avatar }}" alt="{{ w.name }}" class="w-full h-44 object-cover rounded-2xl">
+                    <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-[10px] font-bold bg-coop-dark/80 text-emerald-300 border border-emerald-500/30 backdrop-blur-md">
+                        <i class="fa-solid fa-award mr-1 text-emerald-400"></i> {{ w.badge }}
+                    </span>
+                    <span class="absolute bottom-3 right-3 px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-900/90 text-amber-300 border border-amber-400/30">
+                        <i class="fa-solid fa-star mr-1"></i>{{ w.rating }}
+                    </span>
+                </div>
+
+                <div>
+                    <h4 class="text-base font-bold text-white">{{ w.name }}</h4>
+                    <p class="text-xs text-slate-400">{{ w.role }}</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 text-center text-xs py-2 px-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                    <div>
+                        <div class="font-black text-emerald-400">{{ w.shares_owned }}</div>
+                        <div class="text-[10px] text-slate-400">Co-op Shares</div>
+                    </div>
+                    <div>
+                        <div class="font-black text-indigo-400">₹{{ w.dividend_earned }}</div>
+                        <div class="text-[10px] text-slate-400">Dividends</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1">
+                    <span><i class="fa-solid fa-location-dot text-emerald-400 mr-1"></i>{{ w.location }}</span>
+                    <span class="text-emerald-400 font-semibold">{{ w.jobs_completed }}+ gigs</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+
+    <!-- ACTIVE COMMUNITY RWA BULK DRIVES -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div class="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-indigo-950/50 via-slate-900 to-slate-950 border border-indigo-500/30 relative overflow-hidden">
+            <div class="max-w-2xl space-y-3 mb-8">
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
+                    <i class="fa-solid fa-people-roof mr-1"></i> Resident Welfare Association (RWA) Group Buying
+                </span>
+                <h3 class="text-2xl sm:text-4xl font-extrabold font-heading text-white">
+                    Bulk Community Services with Collective Savings
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-300">
+                    Join your apartment society or neighborhood collective maintenance drives. Up to 30% group discounts while providing guaranteed full-day volume work to cooperative pods.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {% for camp in campaigns %}
+                <div class="glass-panel rounded-2xl p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300">
+                            {{ camp.discount_percent }}% Society Discount
+                        </span>
+                        <span class="text-xs text-indigo-300 font-semibold">{{ camp.days_left }} days left</span>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-bold text-white">{{ camp.service_title }}</h4>
+                        <p class="text-[11px] text-slate-400 mt-1"><i class="fa-solid fa-building mr-1"></i>{{ camp.society_name }}</p>
+                    </div>
+
+                    <!-- Progress -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs text-slate-300">
+                            <span>Pledges: <b class="text-white">{{ camp.current_pledges }}</b> / {{ camp.target_pledges }} homes</span>
+                            <span class="font-bold text-emerald-400">₹{{ camp.group_price_per_unit }}</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-emerald-400 to-indigo-500 h-full rounded-full" style="width: {{ (camp.current_pledges / camp.target_pledges) * 100 }}%;"></div>
+                        </div>
+                    </div>
+
+                    <a href="{{ url_for('community') }}" class="block w-full py-2 rounded-xl bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white border border-indigo-500/40 text-center font-bold text-xs transition">
+                        Join Society Drive
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        updateFairCalculator(1500);
+    });
+</script>
+{% endblock %}
